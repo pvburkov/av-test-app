@@ -14,10 +14,6 @@
   border-radius: 50%;
 }
 
-/* @define-mixin loader-size $size {
-  
-} */
-
 .loader--size-s {
   --loader-scale: 0.6;
 
@@ -26,10 +22,6 @@
 }
 
 .loader--size-m {
-  /* transform: translateX(-50%);
-  animation: spin 1.5s infinite ease-in-out; */
-  /* @mixin loader-size 1.0; */
-
   --loader-scale: 1.0;
 
   transform: translateX(-50%) scale(var(--loader-scale), var(--loader-scale));
@@ -37,10 +29,6 @@
 }
 
 .loader--size-l {
-  /* transform: scale(1.4, 1.4) translateX(-50%);
-  animation: spin 1.5s infinite ease-in-out; */
-  /* @mixin loader-size 1.4; */
-
   --loader-scale: 1.4;
 
   transform: translateX(-50%) scale(var(--loader-scale), var(--loader-scale));

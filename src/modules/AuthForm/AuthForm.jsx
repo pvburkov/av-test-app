@@ -3,6 +3,9 @@ import {
   useHistory
 } from 'react-router-dom';
 import { withNaming } from '@bem-react/classname';
+import Button from 'components/Button';
+import Input from 'components/Input';
+import Label from 'components/Label';
 import Loader from 'components/Loader';
 import './AuthForm.css';
 
@@ -33,53 +36,53 @@ class AuthForm extends PureComponent {
       login,
       loginError,
       password,
-      passwordError
+      passwordError,
+      isChecking
     } = this.state;
 
     return (
       <form className={authFormClasses()} onSubmit={this.onSubmit}>
-        <Loader size="l" />
         <header>Авторизация</header>
-        <label
-          htmlFor="login"
-          className={authFormClasses('label')}
-        >
-          Логин:
-        </label>
-        <input
-          type="text"
+        <Label htmlFor="login">Логин:</Label>
+        <Input
           id="login"
+          hasError={loginError}
           name="login"
-          className={authFormClasses('input', { error: loginError })}
-          value={login}
           onChange={this.onChange}
+          value={login}
+          wideMode
         />
-        <label
+        <Label
           htmlFor="login"
-          className={authFormClasses('error-label', { error: loginError })}
+          isErrorInfo
+          isHidden={!loginError}
         >
           Логин не должен быть пустым!
-        </label>
-        <label
-          htmlFor="password"
-          className={authFormClasses('label')}
-        >
-          Пароль:
-        </label>
-        <input
-          type="password"
+        </Label>
+        <Label htmlFor="password">Пароль:</Label>
+        <Input
           id="password"
+          hasError={passwordError}
           name="password"
-          className={authFormClasses('input', { error: passwordError })}
-          value={password}
           onChange={this.onChange}
+          type="password"
+          value={password}
+          wideMode
         />
-        <label
+        <Label
           htmlFor="password"
-          className={authFormClasses('error-label', { error: passwordError })}
+          isErrorInfo
+          isHidden={!passwordError}
         >
           Пароль не должен быть пустым!
-        </label>
+        </Label>
+        <Button
+          type="submit"
+          isDisabled={loginError || passwordError}
+        >
+          Войти в приложение
+        </Button>
+        {isChecking && <Loader size="l" />}
       </form>
     );
   }
