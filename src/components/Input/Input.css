@@ -1,0 +1,24 @@
+@import "styles/_colors";
+
+.input {
+  border-radius: 8px;
+  border: 2px solid var(--green-light);
+  box-shadow: 0px 0px 5px var(--grey);
+  outline: 0;
+  outline-offset: 0;
+  padding: 5px;
+  font-size: 14px;
+  font-family: 'Segoe UI', Tahoma;
+}
+
+.input:focus {
+  box-shadow: 0px 0px 8px var(--grey-dark);
+}
+
+.input--error {
+  border-color: var(--red);
+}
+
+.input--wide {
+  width: 100%;
+}

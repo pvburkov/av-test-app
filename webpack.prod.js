@@ -2,7 +2,6 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-// Any directories you will be adding code/files into, need to be added to this array so webpack will pick them up
 const defaultInclude = path.resolve(__dirname, 'src');
 
 module.exports = {
@@ -17,32 +16,36 @@ module.exports = {
         test: /\.css$/, // loader CSS
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader'
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1
+            }
+          }
         ],
         include: defaultInclude
       },
       {
         test: /\.jsx?$/, // loader for react
-        use: [{
-          loader: 'babel-loader'
-        }],
-        include: defaultInclude
+        loader: 'babel-loader'
       },
       {
         test: /\.(jpe?g|png|gif)$/, // loader for images
-        use: [{ loader: 'file-loader?name=img/[name]__[hash:base64:5].[ext]' }],
+        loader: 'file-loader?name=img/[name]__[hash:base64:5].[ext]',
         include: defaultInclude
       },
       {
         test: /\.(eot|svg|ttf|woff|woff2)$/, // loader for custom fonts
-        use: [{ loader: 'file-loader?name=font/[name]__[hash:base64:5].[ext]' }],
+        loader: 'file-loader?name=font/[name]__[hash:base64:5].[ext]',
         include: defaultInclude
       }
     ]
   },
   resolve: {
     alias: {
-      components: path.resolve(__dirname, 'src/components')
+      components: path.resolve(__dirname, 'src/components'),
+      modules: path.resolve(__dirname, 'src/modules'),
+      styles: path.resolve(__dirname, 'src/styles')
     },
     extensions: ['.js', '.jsx', '.css'],
     modules: [defaultInclude, 'node_modules']

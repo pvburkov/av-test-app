@@ -1,0 +1,14 @@
+@import "styles/_colors";
+
+.label {
+  font-size: 12px;
+  font-family: 'Segoe UI', Tahoma;
+}
+
+.label--error {
+  color: var(--red);
+}
+
+.label--hidden {
+  color: var(--white);
+}
