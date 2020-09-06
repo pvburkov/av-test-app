@@ -1,0 +1,38 @@
+@import "styles/_fonts";
+
+.authform {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  font-family: var(--base-font-family);
+  padding: 10px;
+  border: 1px solid var(--grey-dark);
+  border-radius: 6px;
+}
+
+.authform__header {
+  width: 100%;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.authform__label {
+  width: 100%;
+  margin: 8px 0;
+  font-size: 16px;
+}
+
+.authform__button {
+  position: relative;
+  margin-top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.authform__loader {
+  top: calc(100vh - 120px);
+}

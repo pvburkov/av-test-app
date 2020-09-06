@@ -13,9 +13,9 @@ const App = () => (
       <Route path="/work">
         <Workplace />
       </Route>
-      <Route path="/">
-        <AuthForm />
-      </Route>
+      <Route path="/" render={({ history }) => (
+        <AuthForm historyPush={history.push} />
+      )} />
     </Switch>
   </Fragment>
 );

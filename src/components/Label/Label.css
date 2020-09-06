@@ -1,8 +1,10 @@
 @import "styles/_colors";
+@import "styles/_fonts";
 
 .label {
+  display: inline-block;
   font-size: 12px;
-  font-family: 'Segoe UI', Tahoma;
+  font-family: var(--base-font-family);
 }
 
 .label--error {
