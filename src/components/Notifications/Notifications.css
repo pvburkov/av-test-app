@@ -1,0 +1,31 @@
+@import "styles/_colors";
+@import "styles/_fonts";
+
+.notifications {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.notifications__item {
+  width: 35%;
+  border-radius: 8px;
+  font-family: var(--base-font-family);
+  text-align: center;
+  padding: 6px;
+  margin-top: 8px;
+}
+
+.notifications__item--type-success {
+  background-color: var(--green-dark);
+}
+
+.notifications__item--type-failure {
+  background-color: var(--red);
+}

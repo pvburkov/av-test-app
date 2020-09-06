@@ -1,10 +1,16 @@
 import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { withNaming } from '@bem-react/classname';
+import { nanoid } from 'nanoid';
 import Button from 'components/Button';
 import Input from 'components/Input';
 import Label from 'components/Label';
 import Loader from 'components/Loader';
+import {
+  addNotificationAction,
+  removeNotificationAction
+} from 'store/actions/notifications';
 import './AuthForm.css';
 
 const authFormClasses = withNaming({ e: '__', m: '_', v: '--' })('authform');
@@ -38,19 +44,47 @@ class AuthForm extends PureComponent {
     /**
      * Хардкод логина и пароля - плохое решение, но в данном случае
      * это имитация авторизации, поэтому прошу не бить по рукам за это :)
-     * Таймер на 3 секунды нужен для демонстрации работы индиктора загрузки.
+     * Таймер на 3 секунды нужен для имитации отправки запроса на сервер
+     * и получения ответа.
      */
 
-    setTimeout(async () => {
-      await this.setState({ isChecking: false });
+    setTimeout(() => {
+      this.setState({ isChecking: false });
 
-      // TODO: сообщения о неверно введенных логине и пароле
       if (login !== 'test' || password !== 'test') {
         this.setState({
+          login: '',
+          password: '',
           loginError: true,
           passwordError: true
         });
+
+        const notificationId = nanoid();
+        this.props.addNotification({
+          id: notificationId,
+          text: 'Введен неверный логин и/или пароль',
+          type: 'failure'
+        });
+
+        setTimeout(
+          () => this.props.removeNotification(notificationId),
+          3000
+        );
+
+        return;
       }
+
+      const notificationId = nanoid();
+      this.props.addNotification({
+        id: notificationId,
+        text: 'Введены корректные данные',
+        type: 'success'
+      });
+
+      setTimeout(
+        () => this.props.removeNotification(notificationId),
+        3000
+      );
 
       const { historyPush } = this.props;
       historyPush('/work');
@@ -130,14 +164,28 @@ class AuthForm extends PureComponent {
           Войти в приложение
           </Button>
         </form>
-        {isChecking && <Loader className={authFormClasses('loader')} />}
+        {isChecking && (
+          <Loader
+            className={authFormClasses('loader')}
+            size={window.innerHeight < 600 ? 's' : 'm'}
+          />
+        )}
       </Fragment>
     );
   }
 }
 
-export default AuthForm;
+const mapDispatchToProps = dispatch => ({
+  addNotification: ({ id, type, text }) => 
+    dispatch(addNotificationAction({ id, type, text })),
+  removeNotification: (notificationId) =>
+    dispatch(removeNotificationAction(notificationId))
+});
+
+export default connect(null, mapDispatchToProps)(AuthForm);
 
 AuthForm.propTypes = {
-  historyPush: PropTypes.func.isRequired
+  historyPush: PropTypes.func.isRequired,
+  addNotification: PropTypes.func.isRequired,
+  removeNotification: PropTypes.func.isRequired
 };
