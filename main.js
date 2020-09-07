@@ -4,7 +4,8 @@ const url = require('url');
 
 if (process.env.NODE_ENV === undefined) process.env.NODE_ENV = 'production';
 
-const isDev = process.env.NODE_ENV === 'development' && process.argv.indexOf('--noDevServer') === -1;
+const isDev = process.env.NODE_ENV === 'development'
+  && process.argv.indexOf('--noDevServer') === -1;
 
 let mainWindow = null;
 
@@ -40,7 +41,9 @@ const baseMainMenuTemplate = [
     submenu: [
       {
         label: 'Quit',
-        accelerator: process.platform === 'darwin' ? 'Command+Q' : 'Ctrl+Q', // Hotkey for this action
+        accelerator: process.platform === 'darwin'
+          ? 'Command+Q'
+          : 'Ctrl+Q', // Hotkey for this action
         click: () => app.quit()
       }
     ]

@@ -22,8 +22,7 @@ module.exports = {
               importLoaders: 1
             }
           }
-        ],
-        include: defaultInclude
+        ]
       },
       {
         test: /\.jsx?$/, // loader for react
