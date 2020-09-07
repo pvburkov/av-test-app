@@ -15,17 +15,21 @@
 
 .notifications__item {
   width: 35%;
+  padding: 6px;
+  margin-top: 8px;
   border-radius: 8px;
   font-family: var(--base-font-family);
   text-align: center;
-  padding: 6px;
-  margin-top: 8px;
 }
 
 .notifications__item--type-success {
   background-color: var(--green-dark);
+  border: 1px solid var(--green-extra-dark);
+  color: var(--white);
 }
 
 .notifications__item--type-failure {
   background-color: var(--red);
+  border: 1px solid var(--red-extra-dark);
+  color: var(--white);
 }
