@@ -34,5 +34,5 @@
 }
 
 .authform__loader {
-  top: calc(100vh - 120px);
+  top: calc(85vh);
 }

@@ -27,16 +27,6 @@ module.exports = {
       {
         test: /\.jsx?$/, // loader for react
         loader: 'babel-loader'
-      },
-      {
-        test: /\.(jpe?g|png|gif)$/, // loader for images
-        loader: 'file-loader?name=img/[name]__[hash:base64:5].[ext]',
-        include: defaultInclude
-      },
-      {
-        test: /\.(eot|svg|ttf|woff|woff2)$/, // loader for custom fonts
-        loader: 'file-loader?name=font/[name]__[hash:base64:5].[ext]',
-        include: defaultInclude
       }
     ]
   },
@@ -45,7 +35,8 @@ module.exports = {
       components: path.resolve(__dirname, 'src/components'),
       modules: path.resolve(__dirname, 'src/modules'),
       store: path.resolve(__dirname, 'src/store'),
-      styles: path.resolve(__dirname, 'src/styles')
+      styles: path.resolve(__dirname, 'src/styles'),
+      utils: path.resolve(__dirname, 'src/utils')
     },
     extensions: ['.js', '.jsx', '.css'],
     modules: [defaultInclude, 'node_modules']

@@ -45,6 +45,7 @@
         "code": 100,
         "tabWidth": 2
       }
-    ]
+    ],
+    "no-case-declarations": "off"
   }
 }

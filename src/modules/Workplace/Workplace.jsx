@@ -11,6 +11,7 @@ import SplitterLayout from 'react-splitter-layout';
 import { withNaming } from '@bem-react/classname';
 import 'react-splitter-layout/lib/index.css';
 import './Workplace.css';
+import ObjectForm from 'modules/ObjectForm/index';
 
 const workplaceNavClasses = withNaming({
   e: '__',
@@ -58,10 +59,7 @@ const Workplace = () => {
         </Link>
         <Link to={`${match.url}/exit`}>
           <div
-            className={workplaceNavClasses('link', {
-              active: pathname === `${match.url}/exit`,
-              exit: true
-            })}
+            className={workplaceNavClasses('link', { exit: true })}
           >
             Выход
           </div>
@@ -69,11 +67,23 @@ const Workplace = () => {
       </nav>
       <Switch>
         <Route path={`${match.url}/view`} render={() => <h1>Просмотр</h1>} />
-        <Route path={`${match.url}/edit`} render={() => <h1>Редактирование</h1>} />
+        <Route
+          path={`${match.url}/edit:objectId`}
+          render={({
+            history,
+            match: {
+              params: {
+                objectId
+              }
+            }
+          }) => <ObjectForm mode="edit" historyPush={history.push} objectId={objectId} />}
+        />
+        <Route
+          path={`${match.url}/edit`}
+          render={({ history }) => <ObjectForm mode="create" historyPush={history.push} />}
+        />
         <Route path={`${match.url}/about`} render={() => <h1>О программе</h1>} />
-        <Route path={`${match.url}/exit`}>
-          <Redirect to="/" />
-        </Route>
+        <Route path={`${match.url}/exit`} render={() => <Redirect to="/" />} />
       </Switch>
     </SplitterLayout>
   );
