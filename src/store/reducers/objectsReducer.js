@@ -1,7 +1,8 @@
 import {
   ADD_OBJECT,
   EDIT_OBJECT,
-  REMOVE_OBJECT
+  REMOVE_OBJECT,
+  LOAD_OBJECTS
 } from '../actions/actionTypes';
 
 const objectsReducer = (state = [], { type, payload }) => {
@@ -19,6 +20,9 @@ const objectsReducer = (state = [], { type, payload }) => {
 
     case REMOVE_OBJECT:
       return state.filter(({ id }) => id !== payload.id);
+
+    case LOAD_OBJECTS:
+      return payload;
 
     default:
       return state;

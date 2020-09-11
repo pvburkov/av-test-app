@@ -15,6 +15,7 @@ import {
   addNotificationAction,
   removeNotificationAction
 } from 'store/actions/notifications';
+import { writeObjectsDataIntoFile } from 'utils/fileUtils';
 import './ObjectForm.css';
 
 const objectFormClasses = withNaming({ e: '__', m: '--', v: '-' });
@@ -128,10 +129,15 @@ class ObjectForm extends PureComponent {
 
   onCancel = () => this.props.historyPush('/work/view');
   
-  onDeleteObject = () => {
+  onDeleteObject = async () => {
     const deleteConfirm = confirm('Вы хотите удалить данный объект?');
 
     if (!deleteConfirm) return;
+
+    const { objects, objectId } = this.props;
+    await writeObjectsDataIntoFile(objects.filter(obj => obj.id !== objectId));
+
+    this.props.removeObject(objectId);
 
     const notificationId = nanoid();
     this.props.addNotification({
@@ -141,9 +147,7 @@ class ObjectForm extends PureComponent {
     });
     setTimeout(() => this.props.removeNotification(notificationId), 3000);
 
-    const { objectData: { id } } = this.state;
-
-    this.props.removeObject(id);
+    this.onCancel();
   };
 
   onChange = ({ target: { name, value } }) => {
@@ -153,23 +157,42 @@ class ObjectForm extends PureComponent {
     });
   };
 
-  onSubmit = (event) => {
+  onSubmit = async (event) => {
     event.preventDefault();
 
     const {
       mode,
       addObject,
-      editObject
+      editObject,
+      objects,
+      objectId
     } = this.props;
 
     const { objectData } = this.state;
 
     if (mode === 'edit') {
+      await writeObjectsDataIntoFile(
+        objects.map(obj => obj.id === objectId
+          ? { ...objectData }
+          : obj
+        )
+      );
+
       editObject(objectData);
     } else {
+      const newObjectId = nanoid();
+      
+      await writeObjectsDataIntoFile([
+        ...objects,
+        {
+          ...objectData,
+          id: newObjectId
+        }
+      ]);
+
       addObject({
         ...objectData,
-        id: nanoid()
+        id: newObjectId
       });
     }
 
@@ -180,6 +203,8 @@ class ObjectForm extends PureComponent {
       text: mode === 'edit' ? 'Объект изменён' : 'Новый объект создан'
     });
     setTimeout(() => this.props.removeNotification(notificationId), 3000);
+
+    this.onCancel();
   };
   
   render() {

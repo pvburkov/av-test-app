@@ -1,12 +1,16 @@
-# electron-react-boilerplate
-Template for native apps based on React and Electron
+# av-test-app
+Приложение для сбора информации о различных объектах, построенное на базе Electron и React
 
-## Template install
-1. Be sure, that you have <strong>git, node.js (v12+) и npm</strong> on your local machine<br>
-2. Clone this repo: ```git clone git@github.com:pvburkov/electron-react-boilerplate.git```
-3. Go to the app's folder: ```cd electron-react-boilerplate```
-4. Install all needed packages: ```npm install```
+## Предварительная настройка
+1. Убедитесь, что на вашем компьютере установлены <strong>git, node.js (v12+) и npm</strong>
+2. Склонируйте данный репозиториий: ```git clone git@github.com:pvburkov/av-test-app.git```
+3. Перейдите в директорию приложения: ```cd av-test-app```
+4. Установите все необходимые пакеты: ```npm install```
 
-* If you want to start app in dev mode, you can use ```npm start``` command
-* If you would like to start app in prod mode locally without building it for your platform, you can use ```npm run prod``` command
-* If you want to build app for your platform, you should use ```npm run package-win/mac/linux``` command (choose version for your platform)
+* Для запуска приложения в режиме разработки запустите команду ```npm start```. В это режиме вам будут доступны инструменты разработчика (Dev Tools) непосредственно в самом приложении.
+* Для запуска приложения в production-режиме, но без сборки нативной версии приложения, запустите команду ```npm run prod```.
+* Для сборки нативной версии приложения под вашу платформу, запустите команду ```npm run package-{win/mac/linux}``` (из 3 вариантов нужно выбрать один, соответствующие скрипты описаны в разделе ```scripts``` файла ```package.json```).
+
+* <strong>Для входа в систему используйте логин `test` и пароль `test`.</strong>
+* В приложении реализован прообраз модуля авторизации, модуль для создания/редактирования объектов и модуль для просмотра информации об объектах. Раздел "О программе" в данный момент не содержит никакой информации, может быть наполнен при неободимости.
+* Информация об объектах хранится в файле `/temp/objectsInfo.json`. Папка `temp` создается в корне логического диска `C` в случае работы под ОС Windows. Тестирование на других платформах на данный момент не проводилось.

@@ -1,4 +1,5 @@
 :root {
+  --green-light-transparent: rgba(29, 192, 70, 0.349);
   --green-light: #1dc046;
   --green-dark: #1a993a;
   --green-extra-dark: #155c27;

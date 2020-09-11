@@ -87,7 +87,7 @@ class AuthForm extends PureComponent {
       );
 
       const { historyPush } = this.props;
-      historyPush('/work');
+      historyPush('/work/view');
     }, 3000);
   };
 

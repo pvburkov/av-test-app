@@ -9,9 +9,10 @@ import {
 } from 'react-router-dom';
 import SplitterLayout from 'react-splitter-layout';
 import { withNaming } from '@bem-react/classname';
+import ObjectForm from 'modules/ObjectForm';
+import ObjectTable from 'modules/ObjectTable';
 import 'react-splitter-layout/lib/index.css';
 import './Workplace.css';
-import ObjectForm from 'modules/ObjectForm/index';
 
 const workplaceNavClasses = withNaming({
   e: '__',
@@ -66,9 +67,9 @@ const Workplace = () => {
         </Link>
       </nav>
       <Switch>
-        <Route path={`${match.url}/view`} render={() => <h1>Просмотр</h1>} />
+        <Route path={`${match.url}/view`} render={() => <ObjectTable />} />
         <Route
-          path={`${match.url}/edit:objectId`}
+          path={`${match.url}/edit/:objectId`}
           render={({
             history,
             match: {

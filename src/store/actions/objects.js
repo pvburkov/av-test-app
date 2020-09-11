@@ -1,7 +1,8 @@
 import {
   ADD_OBJECT,
   EDIT_OBJECT,
-  REMOVE_OBJECT
+  REMOVE_OBJECT,
+  LOAD_OBJECTS
 } from './actionTypes';
 
 const addObjectAction = (objectInfo) => ({
@@ -19,8 +20,14 @@ const removeObjectAction = (objectId) => ({
   payload: objectId
 });
 
+const loadObjectsAction = (objectsData) => ({
+  type: LOAD_OBJECTS,
+  payload: objectsData
+});
+
 export {
   addObjectAction,
   editObjectAction,
-  removeObjectAction
+  removeObjectAction,
+  loadObjectsAction
 };

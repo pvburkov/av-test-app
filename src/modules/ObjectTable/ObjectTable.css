@@ -1,0 +1,51 @@
+@import "styles/_colors";
+@import "styles/_fonts";
+
+.object-table {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 10px;
+  font-family: var(--base-font-family);
+}
+
+.object-table__header {
+  width: 100%;
+  margin: 10px 0;
+  font-size: 22px;
+}
+
+.object-table__button-container {
+  width: 100%;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.object-table-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 10px 0;
+  border-top: 2px solid var(--grey-dark);
+}
+
+.object-table-row:hover {
+  cursor: pointer;
+  background-color: var(--green-light-transparent);
+}
+
+.object-table-row__main {
+  width: 100%;
+  margin-bottom: 5px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.object-table-row__secondary {
+  width: 30%;
+  margin-bottom: 5px;
+  font-size: 16px;
+  color: var(--grey-dark);
+}

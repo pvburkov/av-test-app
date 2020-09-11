@@ -1,20 +1,28 @@
-const fsp = require('fs').promises;
+const fs = require('fs');
 const path = require('path');
 
-const filePath = path.resolve(__dirname, 'objectsInfo.json');
+const fsp = fs.promises;
+
+const dirPath = path.resolve(__dirname, '/temp');
+const filePath = path.resolve(dirPath, 'objectsInfo.json');
 
 const readObjectsDataFromFile = async () => {
-  try {
-    const data = await fsp.readFile(filePath, { encoding: 'utf-8' });
-    return JSON.parse(data);
-  } catch (err) {
-    // если файл не существует, то создаем его,
-    // пишем в него пустой массив и возвращаем пустой массив 
+  if (!fs.existsSync(filePath)) {
+    // если директории /temp не существует, создаем ее
+    if (!fs.existsSync(dirPath)) {
+      await fsp.mkdir(dirPath);
+    }
+
+    // генерим пустой файл, пишем в него пустой массив,
+    // возвращаем пустой массив
     const file = await fsp.open(filePath, 'w');
     await file.write('[]');
     await file.close();
     return [];
   }
+  
+  const data = await fsp.readFile(filePath, { encoding: 'utf-8' });
+  return JSON.parse(data);
 };
 
 const writeObjectsDataIntoFile = async (data) => {
